@@ -1,31 +1,47 @@
 # Aqui escribe tu codigo
 
-def country(country = ""):
-    if __name__ == "__main__":
-        country = raw_input("Enter a country: ")
-    country = country.lower()
-    return country
+import sys
+import os
 
-def capital(capital = ""):
+def option_exit():
+    clean_screen()
+    sys.exit()
+
+def clean_screen():
+    os.system('reset')
+
+def min_countries_and_capitals(country, capital):
     if __name__ == "__main__":
+        country = country.lower()
+        capital = capital.lower()
+    message = "Entered correctly"
+    return message
+
+def option_country(country = ""):
+    clean_screen()
+    if __name__ == "__main__":
+        country = raw_input("Enter the country: ")
         capital = raw_input("Enter the capital: ")
-    capital = capital.lower()
-    return capital
+        min_countries_and_capitals(country, capital)
 
-def capitals_countries(first_word):
+def decision(first_word):
     if first_word == "country":
-        country()
-        capital()
+        option_country()
+    elif first_word == "exit":
+        option_exit()
 
 def write_country(first_word = ""):
     if __name__ == "__main__":
         first_word = raw_input("Enter the word country: ")
     first_word = first_word.lower()
-    capitals_countries(first_word)
+    decision(first_word)
     return first_word
 
-def main():
+def menu():
+    clean_screen()
+    print "COUNTRY"
+    print "EXIT"
     write_country()
 
 if __name__ == "__main__":
-    main()
+    menu()
