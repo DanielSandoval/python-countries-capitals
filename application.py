@@ -105,15 +105,32 @@ class country_and_capital(object):
         return question_add
 
     def decision_add(self, question_add):
-        if question_add == "y":
-            print ""
-            return True
-        elif question_add == "n":
-            self.menu()
-            return False
-        else:
-            self.decision_else()
-            return True
+        a = True
+        while a == True:
+            if question_add == "y":
+                print ""
+                #a = False
+                return True
+            elif question_add == "n":
+                self.menu()
+                #a = False
+                return False
+            else:
+                #a = True
+                question_add = self.my_question_add()
+                #self.decision_else()
+                #return True
+
+    def decision_else(self):
+        myCycle = True
+        while myCycle == True:
+            self.cycleMSG(myCycle)
+            question_add = self.my_question_add()
+            if question_add == "y":
+                return False
+            elif question_add == "n":
+                self.menu()
+                return False
 
     def option_show_countries(self):
         my_countries = self.CountryAndCapital.keys()
@@ -128,14 +145,6 @@ class country_and_capital(object):
         print "CAPITALS"
         for capitals in my_capitals:
             print capitals
-
-    def decision_else(self):
-        myCycle = True
-        while myCycle == True:
-            self.cycleMSG(myCycle)
-            question_add = self.my_question_add()
-            if question_add == "y" or question_add == "n":
-                return False
 
     def cycleMSG(self, myCycle):
         cycleInvalide = myCycle
