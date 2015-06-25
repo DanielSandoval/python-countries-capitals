@@ -28,15 +28,17 @@ class country_and_capital(object):
             option_menu = self.menu_option()
             myCycle = self.validation_menu(option_menu)
 
-            self.cycleMSG(myCycle)
+            self.cycleMSG(myCycle, "Invalid option!!!")
         self.decision(option_menu)
 
     def menu_print(self):
         print "COUNTRY"
         print "COUNTRIES"
         print "CAPITALS"
+        print "ALL"
         print "EXIT"
 
+    #Function test_menu_option
     def menu_option(self, option_menu = ""):
         if __name__ == "__main__":
             option_menu = raw_input("What do you want to do: ")
@@ -44,7 +46,7 @@ class country_and_capital(object):
         return option_menu
 
     def validation_menu(self, option_menu):
-        if option_menu == 'country' or option_menu == "exit" or option_menu == "countries" or option_menu == "capitals":
+        if option_menu == 'country' or option_menu == "exit" or option_menu == "countries" or option_menu == "capitals" or option_menu == "all":
             myCycle = False
         else:
             myCycle = True
@@ -57,6 +59,8 @@ class country_and_capital(object):
             self.option_show_countries()
         elif option_menu == "capitals":
             self.option_show_capitals()
+        elif option_menu == "all":
+            self.show_country_capital()
         elif option_menu == "exit":
             self.option_exit()
 
@@ -87,7 +91,8 @@ class country_and_capital(object):
 
     def verify_countrycapital(self, country, capital):
         if (country and capital).isalpha():
-            print "Entered correctly"
+            if __name__ == "__main__":
+                print "Entered correctly"
             return "Entered correctly"
 
     def add_country_and_capital(self, country, capital):
@@ -96,60 +101,56 @@ class country_and_capital(object):
         country = country.lower()
         capital = capital.lower()
         self.CountryAndCapital [country] = capital
-        print self.CountryAndCapital
         return self.CountryAndCapital
 
     def my_question_add(self):
-        question_add = raw_input("Do you want to add another country and capital? y/n: ")
+        question_add = raw_input("\nDo you want to add another country and capital? y/n: ")
         question_add = question_add.lower()
         return question_add
 
     def decision_add(self, question_add):
-        a = True
-        while a == True:
+        while True:
             if question_add == "y":
                 print ""
-                #a = False
                 return True
             elif question_add == "n":
                 self.menu()
-                #a = False
                 return False
             else:
-                #a = True
+                print "Invalid"
                 question_add = self.my_question_add()
-                #self.decision_else()
-                #return True
-
-    def decision_else(self):
-        myCycle = True
-        while myCycle == True:
-            self.cycleMSG(myCycle)
-            question_add = self.my_question_add()
-            if question_add == "y":
-                return False
-            elif question_add == "n":
-                self.menu()
-                return False
 
     def option_show_countries(self):
+        self.clean_screen()
         my_countries = self.CountryAndCapital.keys()
-        print ""
-        print "COUNTRIES"
+        print "COUNTRIES:"
         for countries in my_countries:
             print countries
+        self.cycleMSG(True, "PRESS ENTER")
+        self.menu()
 
     def option_show_capitals(self):
+        self.clean_screen()
         my_capitals = self.CountryAndCapital.values()
-        print ""
-        print "CAPITALS"
+        print "CAPITALS:"
         for capitals in my_capitals:
             print capitals
+        self.cycleMSG(True, "PRESS ENTER")
+        self.menu()
 
-    def cycleMSG(self, myCycle):
+    def show_country_capital(self):
+        self.clean_screen()
+        countries_captials = self.CountryAndCapital.items()
+        print "COUNTRIES AND CAPITALS"
+        for countries,capitals in countries_captials:
+            print "%s," %countries, capitals
+        self.cycleMSG(True, "PRESS ENTER")
+        self.menu()
+
+    def cycleMSG(self, myCycle, message):
         cycleInvalide = myCycle
         while cycleInvalide == True:
-            enter = raw_input("Invalid option!!!")
+            enter = raw_input(message)
             if enter == "":
                 cycleInvalide = False
             else:
@@ -166,4 +167,5 @@ def my_application():
     main = country_and_capital()
     main.menu()
 
-my_application()
+if __name__ == "__main__":
+    my_application()
