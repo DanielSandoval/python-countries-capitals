@@ -101,6 +101,7 @@ class country_and_capital(object):
         country = country.lower()
         capital = capital.lower()
         self.CountryAndCapital [country] = capital
+        print self.CountryAndCapital
         return self.CountryAndCapital
 
     def my_question_add(self):
