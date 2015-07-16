@@ -21,14 +21,14 @@ class country_and_capital(object):
         self.CountryAndCapital = {}
 
     def menu(self):
-        myCycle = "Invalid Input"
-        while myCycle == "Invalid Input":
+        option_menu = "Invalid Input"
+        while option_menu == "Invalid Input":
             self.clean_screen()
             self.menu_print()
             option_menu = self.menu_option()
-            myCycle = self.validation_menu(option_menu)
+            option_menu = self.validation_menu(option_menu)
 
-            self.cycleMSG(myCycle, "Invalid option!!!")
+            self.cycleMSG(option_menu, "Invalid option!!!")
         self.decision(option_menu)
 
     def menu_print(self):
@@ -38,34 +38,33 @@ class country_and_capital(object):
         print "ALL"
         print "EXIT"
 
-    def menu_option(self, option_menu = ""):
+    def menu_option(self):
         option_menu = raw_input("What do you want to do: ")
-        option_menu = self.validation_min(option_menu)
         return option_menu
-
-    #Function 2
-    def validation_menu(self, option_menu):
-        option_menu = self.validation_min(option_menu)
-        if option_menu == 'country' or option_menu == "exit" or option_menu == "countries" or option_menu == "capitals" or option_menu == "all":
-            myCycle = "Valid Input"
-        else:
-            myCycle = "Invalid Input"
-        return myCycle
 
     #Function 1
     def validation_min(self, option_menu):
         option_menu = option_menu.lower()
         return option_menu
 
+    #Function 2
+    def validation_menu(self, option_menu):
+        option_menu = self.validation_min(option_menu)
+        if option_menu == 'country' or option_menu == "exit" or option_menu == "countries" or option_menu == "capitals" or option_menu == "all":
+            return option_menu
+        else:
+            option_menu = "Invalid Input"
+            return option_menu
+
     def decision(self, option_menu):
         if option_menu == "country":
             self.option_country()
-        elif option_menu == "countries":
-            self.option_show_countries()
-        elif option_menu == "capitals":
-            self.option_show_capitals()
-        elif option_menu == "all":
-            self.show_country_capital()
+        #elif option_menu == "countries":
+            #self.option_show_countries()
+        #elif option_menu == "capitals":
+            #self.option_show_capitals()
+        #elif option_menu == "all":
+            #self.option_show_all()
         elif option_menu == "exit":
             self.option_exit()
 
@@ -73,12 +72,15 @@ class country_and_capital(object):
         self.clean_screen()
         myCycle = True
         while myCycle == True:
-            verify = "Country or Capital incorrect!!!"
-            while verify == "Country or Capital incorrect!!!":
-                country, capital = self.ask_country_capital()
-                verify = self.verify_countrycapital(country, capital)
-                print "%s\n" % verify
-            self.add_country_and_capital(country, capital)
+            verify_add = "Added correctly"
+            while verify_add == "Added correctly":
+                verify_cc = "Country or Capital incorrect!!!"
+                while verify_cc == "Country or Capital incorrect!!!":
+                    country, capital = self.ask_country_capital()
+                    verify_cc = self.verify_countrycapital(country, capital)
+                    print "%s\n" % verify_cc
+                self.add_country_and_capital(country, capital)
+                verify_add = self.verify_add(country, capital)
             question_add = self.my_question_add()
             myCycle = self.decision_add(question_add)
 
@@ -87,6 +89,7 @@ class country_and_capital(object):
         capital = raw_input("Enter the capital: ")
         return country, capital
 
+    #Function 3
     def verify_countrycapital(self, country, capital):
         if country.isalpha() and capital.isalpha():
             return "Entered correctly"
@@ -98,8 +101,21 @@ class country_and_capital(object):
         capital = capital.lower()
         self.CountryAndCapital [country] = capital
 
+    #Function 4
+    def verify_add(self, country, capital):
+        my_items = self.CountryAndCapital
+        if country in my_items and capital in my_items:
+            verify_add = "Added correctly"
+        else:
+            verify_add = "Added incorrectly"
+        return verify_add
+
     def my_question_add(self):
         question_add = raw_input("Do you want to add another country and capital? y/n: ")
+        question_add = self.add_lower(question_add)
+        return question_add
+
+    def add_lower(self, question_add):
         question_add = question_add.lower()
         return question_add
 
@@ -115,13 +131,13 @@ class country_and_capital(object):
                 print "Invalid"
                 question_add = self.my_question_add()
 
-    '''def option_show_countries(self):
+    def option_show_countries(self):
         self.clean_screen()
         my_countries = self.CountryAndCapital.keys()
         print "COUNTRIES:"
         for countries in my_countries:
             print countries
-        self.cycleMSG(True, "PRESS ENTER")
+        self.cycleMSG("Invalid Input", "PRESS ENTER")
         self.menu()
 
     def option_show_capitals(self):
@@ -130,20 +146,20 @@ class country_and_capital(object):
         print "CAPITALS:"
         for capitals in my_capitals:
             print capitals
-        self.cycleMSG(True, "PRESS ENTER")
+        self.cycleMSG("Invalid Input", "PRESS ENTER")
         self.menu()
 
-    def show_country_capital(self):
+    def option_show_all(self):
         self.clean_screen()
         countries_captials = self.CountryAndCapital.items()
         print "COUNTRIES AND CAPITALS"
         for countries,capitals in countries_captials:
             print "%s," %countries, capitals
-        self.cycleMSG(True, "PRESS ENTER")
-        self.menu()'''
+        self.cycleMSG("Invalid Input", "PRESS ENTER")
+        self.menu()
 
-    def cycleMSG(self, myCycle, message):
-        cycleInvalide = myCycle
+    def cycleMSG(self, option, message):
+        cycleInvalide = option
         while cycleInvalide == "Invalid Input":
             enter = raw_input(message)
             if enter == "":
