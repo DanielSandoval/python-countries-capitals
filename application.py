@@ -59,12 +59,12 @@ class country_and_capital(object):
     def decision(self, option_menu):
         if option_menu == "country":
             self.option_country()
-        #elif option_menu == "countries":
-            #self.option_show_countries()
-        #elif option_menu == "capitals":
-            #self.option_show_capitals()
-        #elif option_menu == "all":
-            #self.option_show_all()
+        elif option_menu == "countries":
+            self.option_show_countries()
+        elif option_menu == "capitals":
+            self.option_show_capitals()
+        elif option_menu == "all":
+            self.option_show_all()
         elif option_menu == "exit":
             self.option_exit()
 
@@ -79,8 +79,9 @@ class country_and_capital(object):
                     country, capital = self.ask_country_capital()
                     verify_cc = self.verify_countrycapital(country, capital)
                     print "%s\n" % verify_cc
-                self.add_country_and_capital(country, capital)
-                verify_add = self.verify_add(country, capital)
+                #self.add_country_and_capital(country, capital)
+                #verify_add = self.verify_add(country, capital)
+                self.add_and_verify()
             question_add = self.my_question_add()
             myCycle = self.decision_add(question_add)
 
@@ -96,14 +97,21 @@ class country_and_capital(object):
         else:
             return "Country or Capital incorrect!!!"
 
+    def add_and_verify(self):
+        my_items = self.add_country_and_capital(country, capital)
+        self.verify_add(country, capital)
+
     def add_country_and_capital(self, country, capital):
         country = country.lower()
         capital = capital.lower()
         self.CountryAndCapital [country] = capital
+        my_items = self.CountryAndCapital
+        return my_items
 
     #Function 4
     def verify_add(self, country, capital):
-        my_items = self.CountryAndCapital
+        my_items = self.add_country_and_capital(country, capital)
+        #my_items = self.CountryAndCapital
         if country in my_items and capital in my_items:
             verify_add = "Added correctly"
         else:
