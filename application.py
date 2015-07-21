@@ -80,8 +80,8 @@ class country_and_capital(object):
                     verify_cc = self.verify_countrycapital(country, capital)
                     print "%s\n" % verify_cc
                 #self.add_country_and_capital(country, capital)
-                #verify_add = self.verify_add(country, capital)
-                self.add_and_verify()
+                verify_add = self.verify_add(country, capital)
+                #verify_add = self.add_and_verify(country, capital)
             question_add = self.my_question_add()
             myCycle = self.decision_add(question_add)
 
@@ -97,22 +97,21 @@ class country_and_capital(object):
         else:
             return "Country or Capital incorrect!!!"
 
-    def add_and_verify(self):
+    def add_and_verify(self, country, capital):
         my_items = self.add_country_and_capital(country, capital)
-        self.verify_add(country, capital)
+        return self.verify_add(country, capital)
 
     def add_country_and_capital(self, country, capital):
         country = country.lower()
         capital = capital.lower()
         self.CountryAndCapital [country] = capital
-        my_items = self.CountryAndCapital
-        return my_items
+        return self.CountryAndCapital
 
     #Function 4
     def verify_add(self, country, capital):
         my_items = self.add_country_and_capital(country, capital)
-        #my_items = self.CountryAndCapital
-        if country in my_items and capital in my_items:
+        my_values = self.CountryAndCapital.values()
+        if country in my_items and capital in my_values:
             verify_add = "Added correctly"
         else:
             verify_add = "Added incorrectly"
