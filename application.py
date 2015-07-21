@@ -79,9 +79,7 @@ class country_and_capital(object):
                     country, capital = self.ask_country_capital()
                     verify_cc = self.verify_countrycapital(country, capital)
                     print "%s\n" % verify_cc
-                #self.add_country_and_capital(country, capital)
                 verify_add = self.verify_add(country, capital)
-                #verify_add = self.add_and_verify(country, capital)
             question_add = self.my_question_add()
             myCycle = self.decision_add(question_add)
 
@@ -96,10 +94,6 @@ class country_and_capital(object):
             return "Entered correctly"
         else:
             return "Country or Capital incorrect!!!"
-
-    def add_and_verify(self, country, capital):
-        my_items = self.add_country_and_capital(country, capital)
-        return self.verify_add(country, capital)
 
     def add_country_and_capital(self, country, capital):
         country = country.lower()
