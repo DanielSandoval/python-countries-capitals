@@ -21,15 +21,16 @@ class country_and_capital(object):
         self.CountryAndCapital = {}
 
     def menu(self):
-        option_menu = "Invalid Input"
-        while option_menu == "Invalid Input":
-            self.clean_screen()
-            self.menu_print()
-            option_menu = self.menu_option()
-            option_menu = self.validation_menu(option_menu)
+        while True:
+            option_menu = "Invalid Input"
+            while option_menu == "Invalid Input":
+                self.clean_screen()
+                self.menu_print()
+                option_menu = self.menu_option()
+                option_menu = self.validation_menu(option_menu)
 
-            self.cycleMSG(option_menu, "Invalid option!!!")
-        self.decision(option_menu)
+                self.cycleMSG(option_menu, "Invalid option!!!")
+            self.decision(option_menu)
 
     def menu_print(self):
         print "COUNTRY"
@@ -130,7 +131,6 @@ class country_and_capital(object):
                 myCycle = True
                 return myCycle
             elif question_add == "n":
-                self.menu()
                 myCycle = False
                 return myCycle
             else:
