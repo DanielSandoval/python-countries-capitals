@@ -116,20 +116,25 @@ class country_and_capital(object):
         question_add = self.add_lower(question_add)
         return question_add
 
+    #Function 5
     def add_lower(self, question_add):
         question_add = question_add.lower()
         return question_add
 
+    #Function 6
     def decision_add(self, question_add):
-        while True:
+        myCycle = False
+        while myCycle == False:
             if question_add == "y":
                 print ""
-                return True
+                myCycle = True
+                return myCycle
             elif question_add == "n":
                 self.menu()
-                return False
+                myCycle = False
+                return myCycle
             else:
-                print "Invalid"
+                print "Invalid option"
                 question_add = self.my_question_add()
 
     def option_show_countries(self):

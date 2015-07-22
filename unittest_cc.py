@@ -14,6 +14,7 @@ class Test_CountriesAndCapitals(unittest.TestCase):
         self.assertEqual(class_country_and_capital.validation_menu("COUNTRIES"), "countries")
         self.assertEqual(class_country_and_capital.validation_menu("CAPITALS"), "capitals")
         self.assertEqual(class_country_and_capital.validation_menu("ALL"), "all")
+        self.assertEqual(class_country_and_capital.validation_menu("HOLA"), "Invalid Input")
     #Function 3: verify_countrycapital
     def test_verify_countrycapital(self):
         class_country_and_capital = application.country_and_capital()
@@ -22,6 +23,10 @@ class Test_CountriesAndCapitals(unittest.TestCase):
     def test_verify_add(self):
         class_country_and_capital = application.country_and_capital()
         self.assertEqual(class_country_and_capital.verify_add("francia","paris"), "Added correctly")
+    #Function 5: add_lower
+    def test_add_lower(self):
+        class_country_and_capital = application.country_and_capital()
+        self.assertTrue(class_country_and_capital.add_lower("HOLA").islower())
 
 if __name__ == "__main__":
     unittest.main()
