@@ -27,6 +27,12 @@ class Test_CountriesAndCapitals(unittest.TestCase):
     def test_add_lower(self):
         class_country_and_capital = application.country_and_capital()
         self.assertTrue(class_country_and_capital.add_lower("HOLA").islower())
+    #Function 6: verify_question_add
+    def test_verify_question_add(self):
+        class_country_and_capital = application.country_and_capital()
+        self.assertEqual(class_country_and_capital.verify_question_add("y"), "Valid option")
+        self.assertEqual(class_country_and_capital.verify_question_add("n"), "Valid option")
+        self.assertEqual(class_country_and_capital.verify_question_add("HOLA"), "Invalid option")
 
 if __name__ == "__main__":
     unittest.main()

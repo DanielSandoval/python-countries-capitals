@@ -71,8 +71,8 @@ class country_and_capital(object):
 
     def option_country(self, country = ""):
         self.clean_screen()
-        myCycle = True
-        while myCycle == True:
+        myCycle = "Add country"
+        while myCycle == "Add country":
             verify_add = "Added correctly"
             while verify_add == "Added correctly":
                 verify_cc = "Country or Capital incorrect!!!"
@@ -122,20 +122,28 @@ class country_and_capital(object):
         question_add = question_add.lower()
         return question_add
 
-    #Function 6
     def decision_add(self, question_add):
-        myCycle = False
-        while myCycle == False:
-            if question_add == "y":
-                print ""
-                myCycle = True
-                return myCycle
-            elif question_add == "n":
-                myCycle = False
-                return myCycle
-            else:
-                print "Invalid option"
-                question_add = self.my_question_add()
+        question_add = self.pass_if_question_is_valid(question_add)
+        if question_add == "y":
+            print ""
+            myCycle = "Add country"
+        elif question_add == "n":
+            myCycle = "Not add country"
+        return myCycle
+
+    def pass_if_question_is_valid(self, question_add):
+        myCycle = self.verify_question_add(question_add)
+        while myCycle == "Invalid option":
+            question_add = self.my_question_add()
+            myCycle = self.verify_question_add(question_add)
+        return question_add
+
+    #Function 6
+    def verify_question_add(self, question_add):
+        if question_add != "y" and question_add != "n":
+            return "Invalid option"
+        else:
+            return "Valid option"
 
     def option_show_countries(self):
         self.clean_screen()
