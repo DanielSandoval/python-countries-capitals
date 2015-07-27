@@ -37,6 +37,7 @@ class country_and_capital(object):
         print "COUNTRIES"
         print "CAPITALS"
         print "ALL"
+        print "ALLORDERED"
         print "EXIT"
 
     def menu_option(self):
@@ -51,7 +52,7 @@ class country_and_capital(object):
     #Function 2
     def validation_menu(self, option_menu):
         option_menu = self.validation_min(option_menu)
-        if option_menu == 'country' or option_menu == "exit" or option_menu == "countries" or option_menu == "capitals" or option_menu == "all":
+        if option_menu == 'country' or option_menu == "exit" or option_menu == "countries" or option_menu == "capitals" or option_menu == "all" or option_menu == "allordered":
             return option_menu
         else:
             option_menu = "Invalid Input"
@@ -66,6 +67,8 @@ class country_and_capital(object):
             self.option_show_capitals()
         elif option_menu == "all":
             self.option_show_all()
+        elif option_menu == "allordered":
+            self.option_all_ordered()
         elif option_menu == "exit":
             self.option_exit()
 
@@ -78,6 +81,7 @@ class country_and_capital(object):
                 verify_cc = "Country or Capital incorrect!!!"
                 while verify_cc == "Country or Capital incorrect!!!":
                     country, capital = self.ask_country_capital()
+                    #country, capital = self.validate_spaces(country, capital)
                     verify_cc = self.verify_countrycapital(country, capital)
                     print "%s\n" % verify_cc
                 verify_add = self.verify_add(country, capital)
@@ -95,6 +99,9 @@ class country_and_capital(object):
             return "Entered correctly"
         else:
             return "Country or Capital incorrect!!!"
+
+    def validate_spaces(self,country, capital):
+        pass
 
     def add_country_and_capital(self, country, capital):
         country = country.lower()
@@ -171,6 +178,14 @@ class country_and_capital(object):
             print "%s," %countries, capitals
         self.cycleMSG("Invalid Input", "PRESS ENTER")
         self.menu()
+
+    def option_all_ordered(self):
+        self.clean_screen()
+        print "COUNTRIES AND CAPITALS ORDERED"
+        for key, value in sorted(self.CountryAndCapital.items()):
+            print key, value
+        self.cycleMSG("Invalid Input", "PRESS ENTER")
+        self.menu
 
     def cycleMSG(self, option, message):
         cycleInvalide = option
