@@ -81,7 +81,6 @@ class country_and_capital(object):
                 verify_cc = "Country or Capital incorrect!!!"
                 while verify_cc == "Country or Capital incorrect!!!":
                     country, capital = self.ask_country_capital()
-                    #country, capital = self.validate_spaces(country, capital)
                     verify_cc = self.verify_countrycapital(country, capital)
                     print "%s\n" % verify_cc
                 verify_add = self.verify_add(country, capital)
@@ -95,13 +94,20 @@ class country_and_capital(object):
 
     #Function 3
     def verify_countrycapital(self, country, capital):
+        country, capital = self.validate_spaces(country, capital)
         if country.isalpha() and capital.isalpha():
             return "Entered correctly"
         else:
             return "Country or Capital incorrect!!!"
 
     def validate_spaces(self,country, capital):
-        pass
+        if " " in country:
+            part1, part2 = country.split(" ")
+            country = part1 + part2
+        if " " in capital:
+            part1, part2 = capital.split(" ")
+            capital = part1 + part2
+        return country, capital
 
     def add_country_and_capital(self, country, capital):
         country = country.lower()
