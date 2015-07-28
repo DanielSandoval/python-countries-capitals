@@ -2,6 +2,9 @@
 
 import sys
 import os
+import smtplib, getpass
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
 
 class country_and_capital(object):
     def __init__(self):
@@ -25,6 +28,7 @@ class country_and_capital(object):
         print "CAPITALS"
         print "ALL"
         print "ALLORDERED"
+        print "ALLMAIL"
         print "EXIT"
 
     def menu_option(self):
@@ -39,7 +43,7 @@ class country_and_capital(object):
     #Function 2
     def validation_menu(self, option_menu):
         option_menu = self.validation_min(option_menu)
-        if option_menu == 'country' or option_menu == "exit" or option_menu == "countries" or option_menu == "capitals" or option_menu == "all" or option_menu == "allordered":
+        if option_menu == 'country' or option_menu == "exit" or option_menu == "countries" or option_menu == "capitals" or option_menu == "all" or option_menu == "allordered" or option_menu == "allmail":
             return option_menu
         else:
             option_menu = "Invalid Input"
@@ -56,6 +60,8 @@ class country_and_capital(object):
             self.option_show_all()
         elif option_menu == "allordered":
             self.option_all_ordered()
+        elif option_menu == "allmail":
+            self.option_send_email()
         elif option_menu == "exit":
             self.option_exit()
 
@@ -179,6 +185,42 @@ class country_and_capital(object):
             print key, value
         self.cycleMSG("Invalid Input", "PRESS ENTER")
         self.menu
+
+    def option_send_email(self):
+        self.clean_screen()
+
+        user = "danielsandoval182@gmail.com"
+        password = ""
+        adress = "danielsandoval182@gmail.com"
+        message = "Solo es una prueba para enviar correos por medio de python"
+
+        header = MIMEMultipart()
+        header['From'] = user
+        header['To'] = adress
+        header['Subject'] = "Prueba enviar correos python"
+        header.attach(MIMEText(message, 'plain'))
+
+        #Host y puerto SMTP de Gmail
+        gmail = smtplib.SMTP('smtp.gmail.com', 587)
+        gmail.ehlo()
+        #Protocolo de cifrado de datos utilizado por gmail
+        gmail.starttls()
+        #Credenciales
+        gmail.login(user, password)
+
+        #Muestra la depuracion de la operacion de envio 1 = true
+        #gmail.set_debuglevel(1)
+
+        #message =MIMEText(message, 'html') #Content-type:text/html
+
+        #Send email
+        gmail.sendmail(user, adress, header.as_string())
+
+        #Close conection SMTP
+        #gmail.quit()
+        gmail.close()
+
+        ookk = raw_input("Correo enviado")
 
     def cycleMSG(self, option, message):
         cycleInvalide = option
