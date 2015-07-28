@@ -3,19 +3,6 @@
 import sys
 import os
 
-'''try:
-    text = countries.decode("utf-8") #turn into a string
-    variable = True
-    for i in text:
-        if i.isalpha() == True or i == " ": #if the string is alfhabet
-            if variable == True: #if variable is true
-                variable = True
-        else:
-            variable = False #else, make it false
-    if variable == False: #if variable is false
-        print "Invalid Country" #print message
-        count = True'''
-
 class country_and_capital(object):
     def __init__(self):
         self.CountryAndCapital = {}
