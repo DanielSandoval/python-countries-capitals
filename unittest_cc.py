@@ -20,9 +20,9 @@ class Test_CountriesAndCapitals(unittest.TestCase):
         class_country_and_capital = application.country_and_capital()
         self.assertEqual(class_country_and_capital.verify_countrycapital("a","b"), "Entered correctly")
     #Function 4: verify_add
-    def test_verify_add(self):
+    def test_call_add_and_verify(self):
         class_country_and_capital = application.country_and_capital()
-        self.assertEqual(class_country_and_capital.verify_add("francia","paris"), "Added correctly")
+        self.assertEqual(class_country_and_capital.call_add_and_verify("francia","paris"), "Added correctly")
     #Function 5: add_lower
     def test_add_lower(self):
         class_country_and_capital = application.country_and_capital()

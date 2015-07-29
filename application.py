@@ -69,14 +69,14 @@ class country_and_capital(object):
         self.clean_screen()
         myCycle = "Add country"
         while myCycle == "Add country":
-            verify_add = "Added correctly"
-            while verify_add == "Added correctly":
+            call_add_and_verify = "Added correctly"
+            while call_add_and_verify == "Added correctly":
                 verify_cc = "Country or Capital incorrect!!!"
                 while verify_cc == "Country or Capital incorrect!!!":
                     country, capital = self.ask_country_capital()
                     verify_cc = self.verify_countrycapital(country, capital)
                     print "%s\n" % verify_cc
-                verify_add = self.verify_add(country, capital)
+                call_add_and_verify = self.call_add_and_verify(country, capital)
             question_add = self.my_question_add()
             myCycle = self.decision_add(question_add)
 
@@ -109,14 +109,14 @@ class country_and_capital(object):
         return self.CountryAndCapital
 
     #Function 4
-    def verify_add(self, country, capital):
+    def call_add_and_verify(self, country, capital):
         my_items = self.add_country_and_capital(country, capital)
         my_values = self.CountryAndCapital.values()
         if country in my_items and capital in my_values:
-            verify_add = "Added correctly"
+            call_add_and_verify = "Added correctly"
         else:
-            verify_add = "Added incorrectly"
-        return verify_add
+            call_add_and_verify = "Added incorrectly"
+        return call_add_and_verify
 
     def my_question_add(self):
         question_add = raw_input("Do you want to add another country and capital? y/n: ")
