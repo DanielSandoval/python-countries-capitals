@@ -23,13 +23,13 @@ class country_and_capital(object):
             self.decision(option_menu)
 
     def menu_print(self):
-        print "COUNTRY"
-        print "COUNTRIES"
-        print "CAPITALS"
-        print "ALL"
-        print "ALLORDERED"
-        print "ALLMAIL"
-        print "EXIT"
+        print "1.COUNTRY"
+        print "2.COUNTRIES"
+        print "3.CAPITALS"
+        print "4.ALL"
+        print "5.ALLORDERED"
+        print "6.ALLMAIL"
+        print "7.EXIT"
 
     def menu_option(self):
         option_menu = raw_input("What do you want to do: ")
@@ -69,8 +69,8 @@ class country_and_capital(object):
         self.clean_screen()
         myCycle = "Add country"
         while myCycle == "Add country":
-            call_add_and_verify = "Added correctly"
-            while call_add_and_verify == "Added correctly":
+            call_add_and_verify = "Added incorrectly"
+            while call_add_and_verify == "Added incorrectly":
                 verify_cc = "Country or Capital incorrect!!!"
                 while verify_cc == "Country or Capital incorrect!!!":
                     country, capital = self.ask_country_capital()
@@ -83,9 +83,16 @@ class country_and_capital(object):
     def ask_country_capital(self):
         country = raw_input("Enter the country: ")
         capital = raw_input("Enter the capital: ")
+        country, capital = self.min_country_capital(country, capital)
         return country, capital
 
     #Function 3
+    def min_country_capital(self, country, capital):
+        country = country.lower()
+        capital = capital.lower()
+        return country, capital
+
+    #Function 4
     def verify_countrycapital(self, country, capital):
         country, capital = self.validate_spaces(country, capital)
         if country.isalpha() and capital.isalpha():
@@ -102,13 +109,7 @@ class country_and_capital(object):
             capital = part1 + part2
         return country, capital
 
-    def add_country_and_capital(self, country, capital):
-        country = country.lower()
-        capital = capital.lower()
-        self.CountryAndCapital [country] = capital
-        return self.CountryAndCapital
-
-    #Function 4
+    #Function 5
     def call_add_and_verify(self, country, capital):
         my_items = self.add_country_and_capital(country, capital)
         my_values = self.CountryAndCapital.values()
@@ -118,12 +119,16 @@ class country_and_capital(object):
             call_add_and_verify = "Added incorrectly"
         return call_add_and_verify
 
+    def add_country_and_capital(self, country, capital):
+        self.CountryAndCapital [country] = capital
+        return self.CountryAndCapital
+
     def my_question_add(self):
         question_add = raw_input("Do you want to add another country and capital? y/n: ")
         question_add = self.add_lower(question_add)
         return question_add
 
-    #Function 5
+    #Function 6
     def add_lower(self, question_add):
         question_add = question_add.lower()
         return question_add
@@ -144,7 +149,7 @@ class country_and_capital(object):
             myCycle = self.verify_question_add(question_add)
         return question_add
 
-    #Function 6
+    #Function 7
     def verify_question_add(self, question_add):
         if question_add != "y" and question_add != "n":
             return "Invalid option"
@@ -184,7 +189,7 @@ class country_and_capital(object):
         for key, value in sorted(self.CountryAndCapital.items()):
             print key, value
         self.cycleMSG("Invalid Input", "PRESS ENTER")
-        self.menu
+        self.menu()
 
     def option_send_email(self):
         self.clean_screen()
@@ -214,6 +219,7 @@ class country_and_capital(object):
             self.cycleMSG("Invalid Input", "PRESS ENTER")
         except ValueError:
             print "Error: unable to send mail"
+        self.menu()
 
     def print_info_mail(self, user, receiver):
         print "From %s" % user
