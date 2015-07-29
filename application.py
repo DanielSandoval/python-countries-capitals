@@ -189,38 +189,35 @@ class country_and_capital(object):
     def option_send_email(self):
         self.clean_screen()
 
-        user = "danielsandoval182@gmail.com"
-        password = ""
-        adress = "danielsandoval182@gmail.com"
-        message = "Solo es una prueba para enviar correos por medio de python"
+        user = 'danielsandoval182@gmail.com'
+        receiver = 'danielsandoval182@gmail.com'
+        self.print_info_mail(user, receiver)
+        password = getpass.getpass('Enter the password: ')
 
         header = MIMEMultipart()
         header['From'] = user
-        header['To'] = adress
+        header['To'] = receiver
         header['Subject'] = "Prueba enviar correos python"
-        header.attach(MIMEText(message, 'plain'))
+        for key, value in self.CountryAndCapital.items():
+            message = key + ", " + value
+            header.attach(MIMEText(message, 'plain'))
 
-        #Host y puerto SMTP de Gmail
-        gmail = smtplib.SMTP('smtp.gmail.com', 587)
-        gmail.ehlo()
-        #Protocolo de cifrado de datos utilizado por gmail
-        gmail.starttls()
-        #Credenciales
-        gmail.login(user, password)
+        try:
+            mail = smtplib.SMTP('smtp.gmail.com', 587) #Host y puerto SMTP de Gmail
+            mail.starttls() #Protocolo de cifrado de datos utilizado por gmail
+            mail.login(user, password)
+            mail.sendmail(user, receiver, header.as_string())
 
-        #Muestra la depuracion de la operacion de envio 1 = true
-        #gmail.set_debuglevel(1)
+            mail.close() #Close conection SMTP
 
-        #message =MIMEText(message, 'html') #Content-type:text/html
+            print "Email sent"
+            self.cycleMSG("Invalid Input", "PRESS ENTER")
+        except ValueError:
+            print "Error: unable to send mail"
 
-        #Send email
-        gmail.sendmail(user, adress, header.as_string())
-
-        #Close conection SMTP
-        #gmail.quit()
-        gmail.close()
-
-        ookk = raw_input("Correo enviado")
+    def print_info_mail(self, user, receiver):
+        print "From %s" % user
+        print "To: %s" % receiver
 
     def cycleMSG(self, option, message):
         cycleInvalide = option
